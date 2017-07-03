@@ -7,5 +7,5 @@ public interface RecipeSlot {
 
     String getName();
 
-    List<RecipeSlotOption> getOptions();
+    List<? extends RecipeSlotOption> getOptions();
 }

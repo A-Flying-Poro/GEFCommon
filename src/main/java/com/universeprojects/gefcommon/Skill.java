@@ -11,5 +11,5 @@ public interface Skill {
 
     Long getBaseTimeToRunSecs();
 
-    Double getEstimatedSuccessRate();
+    Double getBaseSuccessRate();
 }

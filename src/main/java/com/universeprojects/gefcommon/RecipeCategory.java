@@ -7,5 +7,5 @@ public interface RecipeCategory {
 
     boolean isRequired();
 
-    List<RecipeSlot> getSlots();
+    List<? extends RecipeSlot> getSlots();
 }

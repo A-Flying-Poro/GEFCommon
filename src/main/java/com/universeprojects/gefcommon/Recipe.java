@@ -7,5 +7,5 @@ public interface Recipe {
 
     String getDescription();
 
-    List<RecipeCategory> getCategories();
+    List<? extends RecipeCategory> getCategories();
 }

@@ -9,5 +9,5 @@ public interface RecipeSlotOption {
 
     List<String> getRequiredAspects();
 
-    List<RecipeFieldRequirement> getFieldRequirements();
+    List<? extends RecipeFieldRequirement> getFieldRequirements();
 }
