@@ -1,4 +1,4 @@
-package com.universeprojects.gefcommon;
+package com.universeprojects.gefcommon.shared.elements;
 
 public interface Skill {
     Long getId();
