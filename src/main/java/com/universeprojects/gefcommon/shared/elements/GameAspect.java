@@ -10,5 +10,5 @@ public interface GameAspect {
 
     GameObject getGameObject();
 
-
+    Iterable<String> getPropertyNames();
 }
