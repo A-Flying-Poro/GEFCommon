@@ -1,12 +1,49 @@
 package com.universeprojects.gefcommon.shared.elements;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+@SuppressWarnings("unused")
 public class RecipeValidator {
     public static RecipeValidator INSTANCE = new RecipeValidator();
 
     private RecipeValidator() {
+    }
+
+    public boolean validateRecipeConstruction(Recipe recipe, RecipeConstruction recipeConstruction) {
+        Map<String, RecipeConstructionSlot> slotMap = createConstructionSlotMap(recipeConstruction);
+        for (RecipeCategory category : recipe.getCategories()) {
+            for (RecipeSlot slot : category.getSlots()) {
+                RecipeConstructionSlot slotData = slotMap.get(slot.getSlotId());
+                if (slotData == null) {
+                    if (category.isRequired()) {
+                        return false;
+                    }
+                } else {
+                    int optionIndex = slotData.getOptionIndex();
+                    final List<? extends RecipeSlotOption> options = slot.getOptions();
+                    if (options.size() >= optionIndex) {
+                        return false;
+                    }
+                    RecipeSlotOption slotOption = options.get(optionIndex);
+                    boolean match = matchesSlotOption(slotOption, slotData.getObject());
+                    if (!match) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private Map<String, RecipeConstructionSlot> createConstructionSlotMap(RecipeConstruction recipeConstruction) {
+        Map<String, RecipeConstructionSlot> slotMap = new LinkedHashMap<>();
+        for (RecipeConstructionSlot slot : recipeConstruction.getSlotData()) {
+            slotMap.put(slot.getSlotId(), slot);
+        }
+        return slotMap;
     }
 
     public List<GameObject> findMatchingObjects(RecipeSlot slot, Iterable<GameObject> objects) {
@@ -21,13 +58,17 @@ public class RecipeValidator {
 
     public boolean matchesSlot(RecipeSlot slot, GameObject<?> object) {
         for (RecipeSlotOption option : slot.getOptions()) {
-            boolean success = matchRequiredAspects(object, option.getRequiredAspects()) &&
-                    matchFields(object, option.getFieldRequirements());
+            boolean success = matchesSlotOption(option, object);
             if (success) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean matchesSlotOption(RecipeSlotOption option, GameObject<?> object) {
+        return matchRequiredAspects(object, option.getRequiredAspects()) &&
+                matchFields(object, option.getFieldRequirements());
     }
 
     private boolean matchRequiredAspects(GameObject<?> object, List<String> requiredAspects) {
