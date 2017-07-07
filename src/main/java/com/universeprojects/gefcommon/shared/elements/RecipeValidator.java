@@ -13,6 +13,9 @@ public class RecipeValidator {
     }
 
     public boolean validateRecipeConstruction(Recipe recipe, RecipeConstruction recipeConstruction) {
+        if (recipe == null) throw new IllegalArgumentException("Recipe must not be null");
+        if (recipeConstruction == null) throw new IllegalArgumentException("RecipeConstruction must not be null");
+        if (recipeConstruction.getSlotData() == null) throw new IllegalArgumentException("RecipeConstruction.getSlotData() must not be null");
         Map<String, RecipeConstructionSlot> slotMap = createConstructionSlotMap(recipeConstruction);
         for (RecipeCategory category : recipe.getCategories()) {
             for (RecipeSlot slot : category.getSlots()) {
@@ -24,7 +27,7 @@ public class RecipeValidator {
                 } else {
                     int optionIndex = slotData.getOptionIndex();
                     final List<? extends RecipeSlotOption> options = slot.getOptions();
-                    if (options.size() >= optionIndex) {
+                    if (optionIndex >= options.size()) {
                         return false;
                     }
                     RecipeSlotOption slotOption = options.get(optionIndex);
