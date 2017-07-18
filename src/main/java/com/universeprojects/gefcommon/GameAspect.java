@@ -1,6 +1,6 @@
 package com.universeprojects.gefcommon;
 
-public interface GameAspect {
+public interface GameAspect<K> {
     // Standard field access..
     Object getProperty(String fieldName);
 
@@ -8,7 +8,7 @@ public interface GameAspect {
 
     String getName();
 
-    GameObject getGameObject();
+    GameObject<K> getGameObject();
 
 
 }

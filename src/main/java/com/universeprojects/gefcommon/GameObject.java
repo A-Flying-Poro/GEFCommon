@@ -25,7 +25,7 @@ public interface GameObject<K> {
     // Aspect related access..
     Collection<String> getAspectNames();
 
-    GameAspect getAspect(String aspectName);
+    GameAspect<K> getAspect(String aspectName);
 
     boolean hasAspect(String aspectName);
 }
