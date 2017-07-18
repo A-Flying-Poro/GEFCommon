@@ -1,4 +1,4 @@
-package com.universeprojects.gefcommon;
+package com.universeprojects.gefcommon.shared.elements;
 
 public interface GameAspect<K> {
     // Standard field access..
@@ -10,5 +10,5 @@ public interface GameAspect<K> {
 
     GameObject<K> getGameObject();
 
-
+    Iterable<String> getPropertyNames();
 }

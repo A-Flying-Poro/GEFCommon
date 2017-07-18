@@ -1,4 +1,4 @@
-package com.universeprojects.gefcommon;
+package com.universeprojects.gefcommon.shared.elements;
 
 import java.util.List;
 
