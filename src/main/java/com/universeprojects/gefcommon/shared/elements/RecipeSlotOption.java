@@ -1,5 +1,6 @@
 package com.universeprojects.gefcommon.shared.elements;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface RecipeSlotOption {
@@ -7,7 +8,7 @@ public interface RecipeSlotOption {
 
     String getName();
 
-    List<String> getRequiredAspects();
+    Collection<String> getRequiredAspects();
 
     List<? extends RecipeFieldRequirement> getFieldRequirements();
 }
