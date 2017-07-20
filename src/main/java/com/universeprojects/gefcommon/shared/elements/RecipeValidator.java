@@ -1,6 +1,7 @@
 package com.universeprojects.gefcommon.shared.elements;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,7 @@ public class RecipeValidator {
                         return false;
                     }
                 } else {
-                    int optionIndex = slotData.getOptionIndex();
-                    final List<? extends RecipeSlotOption> options = slot.getOptions();
-                    if (optionIndex >= options.size()) {
-                        return false;
-                    }
-                    RecipeSlotOption slotOption = options.get(optionIndex);
-                    boolean match = matchesSlotOption(slotOption, slotData.getObject());
-                    if (!match) {
+                    if (!matchesSlot(slot, slotData.getObject())) {
                         return false;
                     }
                 }
@@ -74,17 +68,26 @@ public class RecipeValidator {
                 matchFields(object, option.getFieldRequirements());
     }
 
-    private boolean matchRequiredAspects(GameObject<?> object, List<String> requiredAspects) {
+    private boolean matchRequiredAspects(GameObject<?> object, Collection<String> requiredAspects) {
         return object.getAspectNames().containsAll(requiredAspects);
     }
 
-    private boolean matchFields(GameObject<?> object, List<? extends RecipeFieldRequirement> fieldRequirements) {
+    private boolean matchFields(GameObject<?> object, Collection<? extends RecipeFieldRequirement> fieldRequirements) {
         for (RecipeFieldRequirement requirement : fieldRequirements) {
+            boolean matches = matchFieldOptions(object, requirement.getFieldOptions());
+            if (!matches) return false;
+        }
+        return true;
+    }
+
+    private boolean matchFieldOptions(GameObject<?> object, Collection<? extends RecipeFieldRequirementOption> fieldRequirementOptions) {
+        for (RecipeFieldRequirementOption requirement : fieldRequirementOptions) {
             GameAspect aspect = object.getAspect(requirement.getAspect());
-            if (aspect == null) return false;
-            Object fieldValue = aspect.getProperty(requirement.getField());
-            if (!matchValues(fieldValue, requirement.getValue(), requirement.getOperator())) {
-                return false;
+            if (aspect != null) {
+                Object fieldValue = aspect.getProperty(requirement.getField());
+                if (matchValues(fieldValue, requirement.getValue(), requirement.getOperator())) {
+                    return true;
+                }
             }
         }
         return true;

@@ -1,11 +1,7 @@
 package com.universeprojects.gefcommon.shared.elements;
 
+import java.util.Collection;
+
 public interface RecipeFieldRequirement {
-    String getAspect();
-
-    String getField();
-
-    RecipeFieldRequirementOperator getOperator();
-
-    Object getValue();
+    Collection<? extends RecipeFieldRequirementOption> getFieldOptions();
 }
