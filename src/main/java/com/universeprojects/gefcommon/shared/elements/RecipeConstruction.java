@@ -1,7 +1,7 @@
 package com.universeprojects.gefcommon.shared.elements;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface RecipeConstruction {
-    List<? extends RecipeConstructionSlot> getSlotData();
+    Collection<? extends RecipeConstructionSlot> getSlotData();
 }
