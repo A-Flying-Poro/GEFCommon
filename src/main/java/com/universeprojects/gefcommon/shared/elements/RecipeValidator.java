@@ -90,7 +90,7 @@ public class RecipeValidator {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @SuppressWarnings("OverlyComplexMethod")
