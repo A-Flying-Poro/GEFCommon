@@ -98,8 +98,10 @@ public class GameObjectMapWrapper implements Map<String, Object> {
     }
 
     @Override
-    public void putAll(Map<? extends String, ?> m) {
-        throw new UnsupportedOperationException();
+    public void putAll(Map<? extends String, ?> map) {
+        for(Entry<? extends String, ?> entry : map.entrySet()) {
+            put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
