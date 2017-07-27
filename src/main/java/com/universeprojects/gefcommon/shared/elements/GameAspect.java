@@ -1,5 +1,7 @@
 package com.universeprojects.gefcommon.shared.elements;
 
+import java.util.Collection;
+
 public interface GameAspect<K> {
     // Standard field access..
     Object getProperty(String fieldName);
@@ -10,5 +12,5 @@ public interface GameAspect<K> {
 
     GameObject<K> getGameObject();
 
-    Iterable<String> getPropertyNames();
+    Collection<String> getPropertyNames();
 }

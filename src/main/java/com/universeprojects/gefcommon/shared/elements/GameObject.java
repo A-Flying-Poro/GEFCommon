@@ -21,6 +21,7 @@ public interface GameObject<K> {
 
     void setProperty(String fieldName, Object value);
 
+    Collection<String> getPropertyNames();
 
     // Aspect related access..
     Collection<String> getAspectNames();
