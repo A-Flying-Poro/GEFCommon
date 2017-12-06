@@ -3,7 +3,8 @@ package com.universeprojects.gefcommon.shared.elements;
 import java.util.Collection;
 
 public interface GameObject<K> {
-    K getKey();
+    String getSchemaKind();
+	K getKey();
 
     // Special field access..
     String getName();
