@@ -1,9 +1,7 @@
 package com.universeprojects.gefcommon.shared.elements;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
@@ -26,7 +24,7 @@ public class RecipeValidator {
                         return false;
                     }
                 } else {
-                    if (!matchesSlot(slot, slotData.getObject())) {
+                    if (matchesSlot(slot, slotData.getObject()) != MatchType.MATCH) {
                         return false;
                     }
                 }
@@ -43,29 +41,33 @@ public class RecipeValidator {
         return slotMap;
     }
 
-    public List<GameObject> findMatchingObjects(RecipeSlot slot, Iterable<GameObject> objects) {
-        List<GameObject> list = new ArrayList<>();
+    public Map<GameObject, MatchType> findMatchingObjects(RecipeSlot slot, Iterable<GameObject> objects) {
+        Map<GameObject, MatchType> map = new LinkedHashMap<>();
         for (GameObject<?> object : objects) {
-            if (matchesSlot(slot, object)) {
-                list.add(object);
+            MatchType matchType = matchesSlot(slot, object);
+            if (matchType == MatchType.MATCH || matchType == MatchType.MATCH_INSUFFICIENT_QUANTITY) {
+                map.put(object, matchType);
             }
         }
-        return list;
+        return map;
     }
 
-    public boolean matchesSlot(RecipeSlot slot, GameObject<?> object) {
+    public MatchType matchesSlot(RecipeSlot slot, GameObject<?> object) {
         for (RecipeSlotOption option : slot.getOptions()) {
-            boolean success = matchesSlotOption(option, object);
+            boolean success = matchesSlotOptionWithoutQuantity(option, object);
             if (success) {
-                return true;
+                if(matchesRequiredQuantity(object, option.getRequiredQuantity())) {
+                    return MatchType.MATCH;
+                } else {
+                    return MatchType.MATCH_INSUFFICIENT_QUANTITY;
+                }
             }
         }
-        return false;
+        return MatchType.NO_MATCH;
     }
 
-    private boolean matchesSlotOption(RecipeSlotOption option, GameObject<?> object) {
+    private boolean matchesSlotOptionWithoutQuantity(RecipeSlotOption option, GameObject<?> object) {
         return matchRequiredAspects(object, option.getRequiredAspects()) &&
-            matchesRequiredQuantity(object, option.getRequiredQuantity()) &&
             matchFields(object, option.getFieldRequirements());
     }
 
