@@ -65,11 +65,21 @@ public class RecipeValidator {
 
     private boolean matchesSlotOption(RecipeSlotOption option, GameObject<?> object) {
         return matchRequiredAspects(object, option.getRequiredAspects()) &&
-                matchFields(object, option.getFieldRequirements());
+            matchesRequiredQuantity(object, option.getRequiredQuantity()) &&
+            matchFields(object, option.getFieldRequirements());
     }
 
     private boolean matchRequiredAspects(GameObject<?> object, Collection<String> requiredAspects) {
         return object.getAspectNames().containsAll(requiredAspects);
+    }
+
+    private boolean matchesRequiredQuantity(GameObject<?> object, int amount) {
+        if(amount < 1) throw new IllegalStateException("Required amount cannot be < 1, is "+amount);
+        if(amount == 1) return true;
+        final GameAspect<?> aspect = object.getAspect("SimpleStackableAspect");
+        if(aspect == null) return false;
+        Object quantity = aspect.getProperty("FIELD_Quantity");
+        return matchValues(quantity, amount, RecipeFieldRequirementOperator.GE);
     }
 
     private boolean matchFields(GameObject<?> object, Collection<? extends RecipeFieldRequirement> fieldRequirements) {
