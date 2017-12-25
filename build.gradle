@@ -1,11 +1,6 @@
 apply from: gradle.rootProject.baseScriptPath
-apply plugin: "gwt-base"
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
 //noinspection GroovyUnusedAssignment
 targetCompatibility = 1.7
-
-gwt {
-    gwtVersion = gradle.rootProject.gwtVersion
-}
