@@ -8,6 +8,8 @@ public interface GameObject<K> {
 
     // Special field access..
     String getName();
+    
+    String getItemClass();
 
     Long getQuantity();
 
