@@ -4,7 +4,5 @@ build/
 war
 bin
 .settings
-.classpath
-.project
 *.iml
 .gwt-log
