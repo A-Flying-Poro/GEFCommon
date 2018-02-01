@@ -6,3 +6,5 @@ bin
 .settings
 *.iml
 .gwt-log
+/.classpath
+/.project
