@@ -12,4 +12,6 @@ public interface Skill {
     Long getBaseTimeToRunSecs();
 
     Double getBaseSuccessRate();
+
+    GameObject<String> getGameObject();
 }
