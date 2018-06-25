@@ -14,4 +14,6 @@ public interface Skill {
     Double getBaseSuccessRate();
 
     GameObject<String> getGameObject();
+
+    SkillType getSkillType();
 }

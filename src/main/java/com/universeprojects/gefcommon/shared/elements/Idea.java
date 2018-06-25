@@ -10,4 +10,6 @@ public interface Idea {
     String getIcon();
 
     Long getBaseTimeToRunSecs();
+
+    SkillType getSkillType();
 }
