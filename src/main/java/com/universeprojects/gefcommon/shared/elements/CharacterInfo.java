@@ -1,6 +1,6 @@
 package com.universeprojects.gefcommon.shared.elements;
 
-public interface CharacterInfo {
+public interface CharacterInfo<T> {
     String getName();
-    String getKey();
+    T getKey();
 }
