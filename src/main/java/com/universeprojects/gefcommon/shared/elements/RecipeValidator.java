@@ -52,6 +52,18 @@ public class RecipeValidator {
         return map;
     }
 
+    /**
+     * Overload for a single game object
+     */
+    public Map<GameObject, MatchType> findMatchingObjects(RecipeSlot slot, GameObject object) {
+        Map<GameObject, MatchType> map = new LinkedHashMap<>();
+        MatchType matchType = matchesSlot(slot, object);
+        if (matchType == MatchType.MATCH || matchType == MatchType.MATCH_INSUFFICIENT_QUANTITY) {
+            map.put(object, matchType);
+        }
+        return map;
+    }
+
     public MatchType matchesSlot(RecipeSlot slot, GameObject<?> object) {
         for (RecipeSlotOption option : slot.getOptions()) {
             boolean success = matchesSlotOptionWithoutQuantity(option, object);
