@@ -1,6 +1,5 @@
 package com.universeprojects.gefcommon.shared.elements;
 
-import java.util.List;
 import java.util.Map;
 
 public interface Quest {
@@ -47,7 +46,7 @@ public interface Quest {
 	/**
 	 * @return A data structure mapping objective keys to the completions of the respective objectives
 	 */
-	Map<String, Double> getObjectiveStatuses ();
+	Map<String, Object> getObjectiveStatuses ();
 
 	/**
 	 * @return A string representing the quest owner's key
