@@ -4,11 +4,12 @@ import java.util.Map;
 
 public interface StoreOrder {
     enum StoreOrderState {
-        ACTIVE,
-        INACTIVE,
-        COMPLETED
+        Active,
+        Inactive,
+        Completed
     }
 
+    String getStoreOrderKey();
 
     String getCharacterKey ();
 
