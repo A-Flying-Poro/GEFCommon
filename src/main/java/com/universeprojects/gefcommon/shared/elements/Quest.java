@@ -7,10 +7,10 @@ public interface Quest {
 	 * All the possible quest states
 	 */
 	enum QuestState {
-		SKIPPED,
-		INCOMPLETE,
-		COMPLETE,
-		ABANDONED
+		Skipped,
+		Incomplete,
+		Complete,
+		Abandoned
 	}
 
 	/**
@@ -42,11 +42,6 @@ public interface Quest {
 	 * @return Whether this quest is skippable
 	 */
 	boolean isSkippable ();
-
-	/**
-	 * @return A data structure mapping objective keys to the completions of the respective objectives
-	 */
-	Map<String, Object> getObjectiveStatuses ();
 
 	/**
 	 * @return A string representing the quest owner's key
