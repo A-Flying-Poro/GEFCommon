@@ -7,7 +7,6 @@ public interface QuestObjective {
 	 * All the different possible progression types
 	 */
 	enum ProgressionType {
-		QUEST_COMPLETE,
 		OBJECTIVE_COMPLETE,
 		PROGRESSED,
 		NO_CHANGE
