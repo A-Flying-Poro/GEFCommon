@@ -7,5 +7,7 @@ public interface StoreOrderRequirement {
 
      String getKey ();
 
+     Long getQuantity();
+
      List getFieldFilters ();
 }
