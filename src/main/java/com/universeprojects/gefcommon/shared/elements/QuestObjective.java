@@ -30,7 +30,7 @@ public interface QuestObjective {
 	/**
 	 * @return A list of field filters for items
 	 */
-	List getFieldFilters ();
+	RecipeSlot getFieldFilters ();
 
 	/**
 	 * @return The required quantity of the item to complete the objective
