@@ -77,4 +77,9 @@ public interface Quest {
 	 * @return Whether the quest is complete
 	 */
 	boolean isComplete ();
+
+	/**
+	 * @return The number of objectives that are completed
+	 */
+	int getCurrentCompletion ();
 }
