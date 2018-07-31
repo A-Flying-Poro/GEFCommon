@@ -5,6 +5,8 @@ import java.util.List;
 public interface StoreOrderRequirement {
      String getName ();
 
+     String getIconName();
+
      String getKey ();
 
      Long getQuantity();
