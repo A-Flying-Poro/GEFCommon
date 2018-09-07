@@ -106,13 +106,22 @@ public class RecipeValidator {
 
     private boolean matchFieldOptions(GameObject<?> object, Collection<? extends RecipeFieldRequirementOption> fieldRequirementOptions) {
         for (RecipeFieldRequirementOption requirement : fieldRequirementOptions) {
-            GameAspect aspect = object.getAspect(requirement.getAspect());
-            if (aspect != null) {
-                Object fieldValue = aspect.getProperty(requirement.getField());
+            final String aspectCode = requirement.getAspect();
+            if(aspectCode != null) {
+                GameAspect aspect = object.getAspect(aspectCode);
+                if (aspect != null) {
+                    Object fieldValue = aspect.getProperty(requirement.getField());
+                    if (matchValues(fieldValue, requirement.getValue(), requirement.getOperator())) {
+                        return true;
+                    }
+                }
+            } else {
+                Object fieldValue = object.getProperty(requirement.getField());
                 if (matchValues(fieldValue, requirement.getValue(), requirement.getOperator())) {
                     return true;
                 }
             }
+
         }
         return false;
     }
@@ -125,13 +134,13 @@ public class RecipeValidator {
             case NE:
                 return !matchEquals(fieldValue, requirementValue);
             case LT:
-                return fieldValue != null && matchLessThan(fieldValue, requirementValue, false);
+                return matchLessThan(fieldValue, requirementValue, false);
             case LE:
-                return fieldValue != null && matchLessThan(fieldValue, requirementValue, true);
+                return matchLessThan(fieldValue, requirementValue, true);
             case GT:
-                return fieldValue != null && matchLessThan(requirementValue, fieldValue, false);
+                return matchLessThan(requirementValue, fieldValue, false);
             case GE:
-                return fieldValue != null && matchLessThan(requirementValue, fieldValue, true);
+                return matchLessThan(requirementValue, fieldValue, true);
             case CONTAINS:
                 return matchContains(fieldValue, requirementValue);
             default:
