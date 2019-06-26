@@ -12,4 +12,8 @@ public interface Idea {
     Long getBaseTimeToRunSecs();
 
     SkillType getSkillType();
+
+    Long getParentCategoryId();
+
+    Boolean getClassUnrelated();
 }

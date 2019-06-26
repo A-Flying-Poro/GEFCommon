@@ -84,6 +84,7 @@ public class RecipeValidator {
     }
 
     private boolean matchRequiredAspects(GameObject<?> object, Collection<String> requiredAspects) {
+       if(requiredAspects == null || requiredAspects.size() == 0) return true;
         return object.getAspectNames().containsAll(requiredAspects);
     }
 

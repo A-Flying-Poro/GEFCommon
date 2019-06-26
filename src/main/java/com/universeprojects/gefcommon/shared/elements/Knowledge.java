@@ -4,4 +4,6 @@ public interface Knowledge {
     String getName();
 
     double getExperience();
+
+    String getParentKey();
 }

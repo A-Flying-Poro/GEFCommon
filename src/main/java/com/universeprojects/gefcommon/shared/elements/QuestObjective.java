@@ -1,7 +1,5 @@
 package com.universeprojects.gefcommon.shared.elements;
 
-import java.util.List;
-
 public interface QuestObjective {
 	/**
 	 * All the different possible progression types
@@ -57,4 +55,6 @@ public interface QuestObjective {
 	 * @return Whether the objective is complete
 	 */
 	boolean isComplete ();
+
+	String getTriggeredTutorial();
 }

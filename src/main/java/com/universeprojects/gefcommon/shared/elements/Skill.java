@@ -16,4 +16,6 @@ public interface Skill {
     GameObject<String> getGameObject();
 
     SkillType getSkillType();
+
+    Long getParentCategoryId();
 }
