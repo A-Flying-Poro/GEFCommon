@@ -1,4 +1,4 @@
-apply from: gradle.rootProject.baseScriptPath
+//apply from: gradle.rootProject.baseScriptPath
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
